@@ -1,0 +1,16 @@
+greeting: "Hello"
+welcome: "Welcome to the Recipes API"
+
+recipe:
+  created: "Recipe created successfully"
+  not_found: "Recipe not found"
+
+user:
+  registered: "User registered successfully"
+  error:
+    invalid_credentials: "Invalid credentials"
+    registered: "Username already exists"
+    general: "An error occurred. Please try again."
+
+error:
+  userNotFound: "User not found"

@@ -1,0 +1,11 @@
+// No subir a git dependencias
+node_modules/
+
+// No subir archivos de entorno y claves privadas
+.env
+
+// Tampoco subimos los logs
+*.log
+
+// ni los certificados
+*.pem
