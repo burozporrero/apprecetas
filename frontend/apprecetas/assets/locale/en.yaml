@@ -1,0 +1,22 @@
+auth:
+  welcome: "Welcome"
+  login: "Login"
+  register: "Register"
+  email: "Email"
+  password: "Password"
+  error_invalid_credentials: "Invalid credentials"
+  error_not_authenticated: "Not authenticated"
+
+recipes:
+  title: "Recipes"
+  add: "Add Recipe"
+  edit: "Edit Recipe"
+  name: "Name"
+  ingredients: "Ingredients"
+  instructions: "Instructions"
+  error_loading: "Error loading recipes"
+  error_saving: "Error saving recipe"
+
+common:
+  save: "Save"
+  required: "Required"

@@ -1,0 +1,22 @@
+auth:
+  welcome: "Bienvenido"
+  login: "Iniciar sesión"
+  register: "Registrarse"
+  email: "Correo electrónico"
+  password: "Contraseña"
+  error_invalid_credentials: "Credenciales inválidas"
+  error_not_authenticated: "No autenticado"
+
+recipes:
+  title: "Recetas"
+  add: "Añadir receta"
+  edit: "Editar receta"
+  name: "Nombre"
+  ingredients: "Ingredientes"
+  instructions: "Instrucciones"
+  error_loading: "Error al cargar las recetas"
+  error_saving: "Error al guardar la receta"
+
+common:
+  save: "Guardar"
+  required: "Obligatorio"
