@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart'; // Para kReleaseMode
@@ -24,7 +25,8 @@ void main() async {
   runApp(
     EasyLocalization(
       supportedLocales: [Locale('en'), Locale('es')],
-      path: '../assets/locale',
+      path: 'assets/locale',
+      assetLoader: const YamlAssetLoader(), // Loader YAML
       fallbackLocale: Locale('en'),
       child: MyApp(),
     ),
