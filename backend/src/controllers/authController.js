@@ -57,6 +57,7 @@ const login = async (req, res) => {
 
     // Generar token JWT (expira en 1 hora)
     const token = jwt.sign({ id: usuario.id, username: usuario.username }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
+    if(logger.isDebugEnabled()) logger.debug('Login exitoso', { username });
     res.json({ token, usuario: new Usuario(usuario.id, usuario.username, null).toObject() });
   } catch (error) {
     logger.error('Error en login', { error: error.message });

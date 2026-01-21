@@ -20,13 +20,13 @@ class RecipeDetailScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'ingredients'.tr(),
+              'recipes.ingredients'.tr(),
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             Text(recipe.ingredientes.join(', ')),
             SizedBox(height: 16),
             Text(
-              'instructions'.tr(),
+              'recipes.instructions'.tr(),
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             Text(recipe.instrucciones),

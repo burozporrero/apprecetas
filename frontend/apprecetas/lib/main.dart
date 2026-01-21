@@ -1,25 +1,35 @@
+import 'package:apprecetas/core/logger/logger.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart'; // Para kReleaseMode
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'domain/providers/auth_provider.dart';
 import 'domain/providers/recipe_provider.dart';
-import 'presentation/screens/login_screen.dart';
+import 'presentation/screens/login_screen_old.dart';
 import 'presentation/screens/recipe_list_screen.dart';
+import 'dart:io';
+import 'MyHttpOverrides.dart';
+import 'core/config/env_config.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
 
-  // Carga las variables de entorno basadas en el modo (desarrollo o producción)
-  if (kReleaseMode) {
-    // En producción, carga .env.production
-    await dotenv.load(fileName: ".env.production");
-  } else {
-    // En desarrollo/debug, carga .env.development
-    await dotenv.load(fileName: ".env.development");
+  HttpOverrides.global = MyHttpOverrides();
+
+  // Inicializar variables de entorno
+  await Environment.initialize();
+
+  // Log de información del entorno (solo en debug)
+  if (kDebugMode) {
+    AppLogger.debug(
+      '🚀 Iniciando aplicación en modo: ${Environment.current.name}',
+    );
+    AppLogger.debug('📡 API URL: ${Environment.apiBaseUrl}');
+    AppLogger.debug(
+      '🔒 Permitir certificados inválidos: ${Environment.allowBadCertificates}',
+    );
   }
 
   runApp(

@@ -17,7 +17,7 @@ class AuthProvider with ChangeNotifier {
       final data = await _authRepository.login(username, password);
       _token = data['token'];
       notifyListeners();
-      AppLogger.info('Login exitoso', data['user']);
+      AppLogger.info('Login exitoso', data);
     } catch (e) {
       AppLogger.error('Error en login', e);
       rethrow;

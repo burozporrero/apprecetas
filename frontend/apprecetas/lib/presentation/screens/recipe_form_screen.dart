@@ -44,7 +44,7 @@ class _RecipeFormScreenState extends State<RecipeFormScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.recipe == null ? 'add_recipe'.tr() : 'edit_recipe'.tr(),
+          widget.recipe == null ? 'recipes.add'.tr() : 'recipes.edit'.tr(),
         ),
       ),
       body: Form(
@@ -55,18 +55,22 @@ class _RecipeFormScreenState extends State<RecipeFormScreen> {
             children: [
               TextFormField(
                 controller: _nameController,
-                decoration: InputDecoration(labelText: 'name'.tr()),
-                validator: (v) => v!.isEmpty ? 'required'.tr() : null,
+                decoration: InputDecoration(labelText: 'recipes.name'.tr()),
+                validator: (v) => v!.isEmpty ? 'common.required'.tr() : null,
               ),
               TextFormField(
                 controller: _ingredientsController,
-                decoration: InputDecoration(labelText: 'ingredients'.tr()),
-                validator: (v) => v!.isEmpty ? 'required'.tr() : null,
+                decoration: InputDecoration(
+                  labelText: 'recipes.ingredients'.tr(),
+                ),
+                validator: (v) => v!.isEmpty ? 'common.required'.tr() : null,
               ),
               TextFormField(
                 controller: _instructionsController,
-                decoration: InputDecoration(labelText: 'instructions'.tr()),
-                validator: (v) => v!.isEmpty ? 'required'.tr() : null,
+                decoration: InputDecoration(
+                  labelText: 'recipes.instructions'.tr(),
+                ),
+                validator: (v) => v!.isEmpty ? 'common.required'.tr() : null,
               ),
               ElevatedButton(
                 onPressed: () async {
@@ -90,12 +94,12 @@ class _RecipeFormScreenState extends State<RecipeFormScreen> {
                       Navigator.pop(context);
                     } catch (e) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('error_saving_recipe'.tr())),
+                        SnackBar(content: Text('recipes.error_saving'.tr())),
                       );
                     }
                   }
                 },
-                child: Text('save'.tr()),
+                child: Text('common.save'.tr()),
               ),
             ],
           ),

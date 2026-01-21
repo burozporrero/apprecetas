@@ -15,10 +15,35 @@ class AppLogger {
     level: Level.debug, // Cambia a Level.info en producción
   );
 
-  static void info(String message, [dynamic data]) => _logger.i(message);
-  static void debug(String message, [dynamic data]) => _logger.d(message);
-  static void error(String message, [dynamic error, StackTrace? stackTrace]) =>
+  static void info(String message, [dynamic data]) {
+    if (data != null) {
+      // Convertir cualquier objeto a String
+      final dataStr = data is String ? data : data.toString();
+      _logger.i('$message: $dataStr');
+    } else {
+      _logger.i(message);
+    }
+  }
+
+  static void debug(String message, [dynamic data]) {
+    if (data != null) {
+      // Convertir cualquier objeto a String
+      final dataStr = data is String ? data : data.toString();
+      _logger.d('$message: $dataStr');
+    } else {
+      _logger.d(message);
+    }
+  }
+
+  static void error(String message, [dynamic error, StackTrace? stackTrace]) {
+    if (stackTrace != null) {
       _logger.e(message, error: error, stackTrace: stackTrace);
-  static void warning(String message, [dynamic data]) =>
-      _logger.w(message);
+    } else {
+      _logger.e(message, error: error);
+    }
+  }
+
+  static void warning(String message) {
+    _logger.w(message);
+  }
 }

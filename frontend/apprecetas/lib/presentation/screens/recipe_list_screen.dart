@@ -17,12 +17,14 @@ class RecipeListScreen extends StatelessWidget {
     final token = authProvider.token;
 
     if (token == null) {
-      return Center(child: Text('error_not_authenticated'.tr())); // Traducción
+      return Center(
+        child: Text('auth.error_not_authenticated'.tr()),
+      ); // Traducción
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('recipes'.tr()),
+        title: Text('recipes.title'.tr()),
         actions: [
           IconButton(
             icon: Icon(Icons.add),
@@ -40,7 +42,7 @@ class RecipeListScreen extends StatelessWidget {
             return Center(child: CircularProgressIndicator());
           }
           if (snapshot.hasError) {
-            return Center(child: Text('error_loading_recipes'.tr()));
+            return Center(child: Text('recipes.error_loading'.tr()));
           }
           return ListView.builder(
             itemCount: recipeProvider.recipes.length,
