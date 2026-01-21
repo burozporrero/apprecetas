@@ -9,17 +9,31 @@ import '../../domain/providers/auth_provider.dart';
 import 'recipe_form_screen.dart';
 import 'recipe_detail_screen.dart';
 
-class RecipeListScreen extends StatelessWidget {
+class RecipeListScreen extends StatefulWidget {
+  @override
+  _RecipeListScreenState createState() => _RecipeListScreenState();
+}
+
+class _RecipeListScreenState extends State<RecipeListScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // Cargar recetas solo una vez al inicializar la pantalla (evita el bucle infinito)
+    final recipeProvider = Provider.of<RecipeProvider>(context, listen: false);
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    final token = authProvider.token;
+    if (token != null) {
+      recipeProvider.loadRecipes(token);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final recipeProvider = Provider.of<RecipeProvider>(context);
     final authProvider = Provider.of<AuthProvider>(context);
     final token = authProvider.token;
 
     if (token == null) {
-      return Center(
-        child: Text('auth.error_not_authenticated'.tr()),
-      ); // Traducción
+      return Center(child: Text('auth.error_not_authenticated'.tr()));
     }
 
     return Scaffold(
@@ -35,14 +49,18 @@ class RecipeListScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: FutureBuilder(
-        future: recipeProvider.loadRecipes(token),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
+      body: Consumer<RecipeProvider>(
+        builder: (context, recipeProvider, child) {
+          if (recipeProvider.isLoading) {
             return Center(child: CircularProgressIndicator());
           }
-          if (snapshot.hasError) {
-            return Center(child: Text('recipes.error_loading'.tr()));
+          if (recipeProvider.recipes.isEmpty) {
+            // Manejo explícito para 0 recetas: muestra un mensaje en lugar de una lista vacía
+            return Center(
+              child: Text(
+                'recipes.no_recipes'.tr(),
+              ), // Agrega esta traducción en tu archivo de localización (ej. en.json: "no_recipes": "No hay recetas disponibles")
+            );
           }
           return ListView.builder(
             itemCount: recipeProvider.recipes.length,
