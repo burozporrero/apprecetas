@@ -5,7 +5,7 @@ import '../../domain/providers/auth_provider.dart';
 import '../../core/logger/logger.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();

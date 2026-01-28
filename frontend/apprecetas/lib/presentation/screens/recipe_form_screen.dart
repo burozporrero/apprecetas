@@ -11,13 +11,13 @@ import '../../data/models/recipe.dart';
 class RecipeFormScreen extends StatefulWidget {
   final Recipe? recipe;
 
-  RecipeFormScreen({this.recipe});
+  const RecipeFormScreen({super.key, this.recipe});
 
   @override
-  _RecipeFormScreenState createState() => _RecipeFormScreenState();
+  RecipeFormScreenState createState() => RecipeFormScreenState();
 }
 
-class _RecipeFormScreenState extends State<RecipeFormScreen> {
+class RecipeFormScreenState extends State<RecipeFormScreen> {
   final _formKey = GlobalKey<FormState>();
   late TextEditingController _nameController;
   late TextEditingController _ingredientsController;
@@ -91,6 +91,7 @@ class _RecipeFormScreenState extends State<RecipeFormScreen> {
                           recipe,
                         );
                       }
+                      if (!context.mounted) return;
                       Navigator.pop(context);
                     } catch (e) {
                       ScaffoldMessenger.of(context).showSnackBar(

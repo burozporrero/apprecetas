@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart'; // Para kReleaseMode
 import 'domain/providers/auth_provider.dart';
 import 'domain/providers/recipe_provider.dart';
-import 'presentation/screens/login_screen_old.dart';
+import 'presentation/screens/login_screen.dart';
 import 'presentation/screens/recipe_list_screen.dart';
 import 'dart:io';
-import 'MyHttpOverrides.dart';
+import 'my_http_overrides.dart';
 import 'core/config/env_config.dart';
 
 void main() async {
@@ -44,6 +44,8 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -55,7 +57,7 @@ class MyApp extends StatelessWidget {
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: context.locale,
-        home: LoginScreen(),
+        home: const LoginScreen(),
         routes: {
           '/recipes': (context) => RecipeListScreen(),
         }, // Pantalla inicial

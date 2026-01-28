@@ -8,7 +8,7 @@ import '../../data/models/recipe.dart';
 class RecipeDetailScreen extends StatelessWidget {
   final Recipe recipe;
 
-  RecipeDetailScreen({required this.recipe});
+  const RecipeDetailScreen({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context) {

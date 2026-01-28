@@ -150,7 +150,7 @@ class ApiService {
         } else if (errorData is String) {
           throw Exception('Error del servidor: $errorData');
         } else {
-          throw Exception('Error del servidor (${statusCode})');
+          throw Exception('Error del servidor ($statusCode)');
         }
       }
 
