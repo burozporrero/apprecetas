@@ -26,3 +26,10 @@ linter:
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
+
+# Opciones de lenguaje para mayor rigor (sin ser extremo)
+analyzer:
+  language:
+    strict-casts: true      # Fuerza casts seguros
+    strict-inference: true  # Inferencia de tipos estricta
+    strict-raw-types: true  # Evita tipos raw inseguros

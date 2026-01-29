@@ -16,8 +16,20 @@ class RecipeRepository {
       'GET',
       token: token,
     );
-    List<dynamic> data = response.data;
-    return data.map((json) => Recipe.fromJson(json)).toList();
+    if (response.data is List<dynamic>) {
+      List<dynamic> data = response.data as List<dynamic>;
+      return data
+          .where(
+            (json) => json is Map<String, dynamic>,
+          ) // Filtra solo mapas válidos
+          .map((json) => Recipe.fromJson(json as Map<String, dynamic>))
+          .toList();
+    } else {
+      // Manejo de error: ej. retorna lista vacía o lanza excepción
+      throw Exception(
+        'Datos inválidos: esperado List<Map<String, dynamic>>, recibido ${response.data.runtimeType}',
+      );
+    }
   }
 
   Future<Recipe> createRecipe(String token, Recipe recipe) async {
@@ -27,7 +39,7 @@ class RecipeRepository {
       data: recipe.toJson(),
       token: token,
     );
-    return Recipe.fromJson(response.data);
+    return Recipe.fromJson(response.data as Map<String, dynamic>);
   }
 
   Future<Recipe> updateRecipe(String token, int id, Recipe recipe) async {
@@ -37,7 +49,7 @@ class RecipeRepository {
       data: recipe.toJson(),
       token: token,
     );
-    return Recipe.fromJson(response.data);
+    return Recipe.fromJson(response.data as Map<String, dynamic>);
   }
 
   Future<void> deleteRecipe(String token, int id) async {

@@ -6,6 +6,11 @@ class User {
   User({required this.id, required this.username});
 
   factory User.fromJson(Map<String, dynamic> json) {
-    return User(id: json['id'], username: json['username']);
+    return User(
+      id: json['id'] is int
+          ? json['id'] as int
+          : throw Exception('id debe ser int'),
+      username: json['username'] is String ? json['username'] as String : '',
+    );
   }
 }

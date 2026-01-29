@@ -18,11 +18,11 @@ class Recipe {
 
   factory Recipe.fromJson(Map<String, dynamic> json) {
     return Recipe(
-      id: json['id'],
-      nombre: json['nombre'],
+      id: json['id'] as int,
+      nombre: json['nombre'] as String,
       ingredientes: List<String>.from(json['ingredientes'] ?? []),
-      instrucciones: json['instrucciones'],
-      usuarioId: json['usuario_id'],
+      instrucciones: json['instrucciones'] as String,
+      usuarioId: json['usuario_id'] as int,
     );
   }
 
